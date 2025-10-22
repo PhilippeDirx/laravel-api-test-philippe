@@ -46,8 +46,30 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Relation for appointments.
+     * @return HasMany
+     */
     public function appointments(): HasMany
     {
         return $this->hasmany(Appointment::class);
+    }
+
+    /**
+     * Relation wrapper for past appointments.
+     * @return HasMany
+     */
+    public function pastAppointments(): HasMany
+    {
+        return $this->appointments()->past();
+    }
+
+    /**
+     * Relation wrapper for future appointments.
+     * @return HasMany
+     */
+    public function futureAppointments(): HasMany
+    {
+        return $this->appointments()->future();
     }
 }
